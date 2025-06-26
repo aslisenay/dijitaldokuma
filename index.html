@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dijital Dokuma</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #eee;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #33ffcc;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .output {
+            margin-top: 30px;
+            white-space: pre;
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90vw;
+            overflow-x: auto;
+        }
+
+        small {
+            color: #888;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dijital Dokuma Tezgahı</h1>
+    <input type="text" id="wordInput" placeholder="Bir kelime gir ve dokumayı gör...">
+    <div class="output" id="weaveOutput"></div>
+    <small>Her harf bir iz, her bit bir ilmek.</small>
+
+    <script>
+        const input = document.getElementById('wordInput');
+        const output = document.getElementById('weaveOutput');
+
+        input.addEventListener('input', () => {
+            const word = input.value.trim();
+            let pattern = "";
+
+            for (let char of word) {
+                const binary = char.charCodeAt(0).toString(2).padStart(8, '0');
+                for (let bit of binary) {
+                    pattern += bit === "1" ? "█" : " ";
+                }
+                pattern += "\n";
+            }
+
+            output.textContent = pattern || "(desen burada belirecek)";
+        });
+    </script>
+</body>
+</html>
