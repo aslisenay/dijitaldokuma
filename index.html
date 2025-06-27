@@ -48,15 +48,28 @@
 
     <h1>Dijital Dokuma Tezgahı</h1>
     <input type="text" id="wordInput" placeholder="Bir kelime gir ve dokumayı gör...">
-    <div class="output" id="weaveOutput"></div>
+    <div class="output" id="weaveOutput">(desen burada belirecek)</div>
+
+    <p style="max-width: 600px; text-align: center; margin-top: 20px; font-family: 'Courier New', monospace; color: #aaa; font-size: 14px;">
+        Bu araç, yazdığınız kelimenin her harfini ikili (binary) koda dönüştürerek görsel bir desen üretir. "█" aktif bitleri, boşluk ise pasif bitleri temsil eder.
+    </p>
+
     <small>Her harf bir iz, her bit bir ilmek.</small>
 
     <script>
         const input = document.getElementById('wordInput');
         const output = document.getElementById('weaveOutput');
 
+        // Sayfa açılır açılmaz yazı hazır
+        // (Zaten yukarıda div içinde var, ama garanti için bırakabiliriz)
+        output.textContent = "(desen burada belirecek)";
+
         input.addEventListener('input', () => {
             const word = input.value.trim();
+            if (!word) {
+                output.textContent = "(desen burada belirecek)";
+                return;
+            }
             let pattern = "";
 
             for (let char of word) {
@@ -67,7 +80,7 @@
                 pattern += "\n";
             }
 
-            output.textContent = pattern || "(desen burada belirecek)";
+            output.textContent = pattern;
         });
     </script>
 </body>
